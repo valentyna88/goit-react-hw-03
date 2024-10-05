@@ -5,11 +5,16 @@ const ContactForm = () => {
   return (
     <Formik initialValues={{}} onSubmit={() => {}}>
       <Form className={css.form}>
-        <label htmlFor="">Name</label>
-        <Field className={css.field} type="text" name="name" id="" />
+        <div className={css.wrapper}>
+          <label htmlFor="">Name</label>
+          <Field className={css.field} type="text" name="name" id="" />
+        </div>
 
-        <label htmlFor="">Number</label>
-        <Field className={css.field} type="text" name="number" id="" />
+        <div className={css.wrapper}>
+          <label htmlFor="">Number</label>
+          <Field className={css.field} type="text" name="number" id="" />
+        </div>
+
         <button className={css.btn} type="submit">
           Add contact
         </button>
