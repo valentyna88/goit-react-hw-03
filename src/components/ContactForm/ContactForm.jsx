@@ -4,14 +4,17 @@ import * as Yup from 'yup';
 import css from './ContactForm.module.css';
 
 const ContactForm = ({ onAdd }) => {
-  const validationSchema = Yup.object({
+  const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Too short!')
       .max(50, 'Name must be less than 50 characters')
       .required('Required'),
     number: Yup.string()
       .min(3, 'Too short!')
-      .max(50, 'Number must be less than 50 characters')
+      .matches(
+        /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
+        'Invalid phone number format'
+      )
       .required('Required'),
   });
 
