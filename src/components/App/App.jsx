@@ -7,29 +7,34 @@ import ContactList from '../ContactList/ContactList';
 import contactsData from '../../contacts.json';
 import { useState } from 'react';
 
-function App() {
+const App = () => {
   const [contacts, setContacts] = useState(contactsData);
-  const [searchContact, setSearchContact] = useState('');
+  const [filter, setFilter] = useState('');
 
-  const handleSearchChange = value => {
-    setSearchContact(value);
+  const addContact = newContact => {
+    setContacts(prevState => {
+      return [...prevState, newContact];
+    });
+  };
+
+  const deleteContact = contactId => {
+    setContacts(prevState => {
+      return prevState.filter(contact => contact.id !== contactId);
+    });
   };
 
   const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(searchContact.toLowerCase())
+    contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim())
   );
 
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
-      <ContactForm />
-      <SearchBox
-        searchValue={searchContact}
-        onSearchChange={handleSearchChange}
-      />
-      <ContactList contacts={filteredContacts} />
+      <ContactForm onAdd={addContact} />
+      <SearchBox value={filter} onFilter={setFilter} />
+      <ContactList contacts={filteredContacts} onDelete={deleteContact} />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,14 +1,14 @@
 import css from './SearchBox.module.css';
 
-const SearchBox = ({ searchValue, onSearchChange }) => {
+const SearchBox = ({ value, onFilter }) => {
   return (
     <div className={css.wrapper}>
-      <label htmlFor="">Find contacts by name</label>
+      <label>Find contacts by name</label>
       <input
         className={css.field}
         type="text"
-        value={searchValue}
-        onChange={event => onSearchChange(event.target.value)}
+        value={value}
+        onChange={event => onFilter(event.target.value)}
       />
     </div>
   );
