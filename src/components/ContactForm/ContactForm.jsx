@@ -12,10 +12,7 @@ const ContactForm = ({ onAdd }) => {
       .required('Required'),
     number: Yup.string()
       .min(3, 'Too short!')
-      .matches(
-        /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
-        'Invalid phone number format'
-      )
+      .matches(/^[0-9]{3}-[0-9]{2}-[0-9]{2}$/, 'xxx-xx-xx')
       .required('Required'),
   });
 
