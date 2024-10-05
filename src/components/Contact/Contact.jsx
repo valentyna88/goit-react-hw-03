@@ -1,17 +1,16 @@
-import { BsFillPersonFill } from 'react-icons/bs';
-import { MdPhone } from 'react-icons/md';
+import { MdPerson, MdPhone } from 'react-icons/md';
 
 import css from './Contact.module.css';
 
 const Contact = ({ name, number, onDelete }) => {
   return (
     <li className={css.contactItem}>
-      <div className={css.contactInfo}>
-        <p>
-          <BsFillPersonFill />
+      <div>
+        <p className={css.contactInfo}>
+          <MdPerson />
           {name}
         </p>
-        <p>
+        <p className={css.contactInfo}>
           <MdPhone />
           {number}
         </p>
