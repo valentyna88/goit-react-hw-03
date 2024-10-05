@@ -1,0 +1,9 @@
+.contactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
