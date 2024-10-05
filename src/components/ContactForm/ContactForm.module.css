@@ -10,23 +10,26 @@
   border-radius: 4px;
   margin-bottom: 20px;
 }
-
 .wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 }
-
 .field {
   border: 1px solid gray;
   padding: 8px 5px;
   border-radius: 4px;
 }
-
 .field:focus {
   border-color: #0982cd;
 }
-
 .btn {
   padding: 8px 10px;
+}
+.errorMessage {
+  position: absolute;
+  bottom: 9px;
+  left: 230px;
+  color: red;
 }
