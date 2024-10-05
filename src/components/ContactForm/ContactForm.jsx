@@ -11,10 +11,19 @@ const ContactForm = ({ onAdd }) => {
       .max(50, 'Name must be less than 50 characters')
       .required('Required'),
     number: Yup.string()
-      .min(3, 'Too short!')
-      .matches(/^[0-9]{3}-[0-9]{2}-[0-9]{2}$/, 'xxx-xx-xx')
+      .matches(/^\d{3}-\d{2}-\d{2}$/, 'Phone number format: xxx-xx-xx')
       .required('Required'),
   });
+
+  const formatPhoneNumber = value => {
+    const cleaned = value.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{0,3})(\d{0,2})(\d{0,2})$/);
+
+    if (match) {
+      return [match[1], match[2], match[3]].filter(Boolean).join('-');
+    }
+    return value;
+  };
 
   const handleSubmit = (values, actions) => {
     onAdd({ id: nanoid(), ...values });
@@ -40,7 +49,18 @@ const ContactForm = ({ onAdd }) => {
 
         <div className={css.wrapper}>
           <label>Number</label>
-          <Field className={css.field} type="text" name="number" />
+          <Field name="number">
+            {({ field, form }) => (
+              <input
+                {...field}
+                className={css.field}
+                onChange={e => {
+                  const formattedNumber = formatPhoneNumber(e.target.value);
+                  form.setFieldValue('number', formattedNumber);
+                }}
+              />
+            )}
+          </Field>
           <ErrorMessage
             name="number"
             component="p"
